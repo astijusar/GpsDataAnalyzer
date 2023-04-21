@@ -15,16 +15,5 @@ namespace GpsDataAnalyzer.Models
         public int Angle { get; set; }
         public int Altitude { get; set; }
         public int Satelites { get; set; }
-
-        public GpsData(double latitude, double longitude, DateTime gpsTime, int speed, int angle, int altitude, int satelites)
-        {
-            Latitude = latitude;
-            Longitude = longitude;
-            GpsTime = gpsTime;
-            Speed = speed;
-            Angle = angle;
-            Altitude = altitude;
-            Satelites = satelites;
-        }
     }
 }
