@@ -1,8 +1,10 @@
-﻿using GpsDataAnalyzer.Models;
+﻿using ConsoleChartLibrary;
+using GpsDataAnalyzer.Models;
 using GpsDataAnalyzer.Utilities;
 using GpsDataAnalyzer.Utilities.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GpsDataAnalyzer
 {
@@ -19,7 +21,37 @@ namespace GpsDataAnalyzer
 
             gpsData.AddRange(fileReaderManager.JsonFile.ReadFile(JSON_FILE));
             gpsData.AddRange(fileReaderManager.CsvFile.ReadFile(CSV_FILE));
-            gpsData.AddRange(fileReaderManager.BinaryFile.ReadFile(BINARY_FILE));
+            //gpsData.AddRange(fileReaderManager.BinaryFile.ReadFile(BINARY_FILE));
+
+            Histogram<int, int> sateliteHistogram = new Histogram<int, int>()
+            {
+                Data = gpsData.Select(x => x.Satellites)
+                    .GroupBy(n => n)
+                    .ToDictionary(g => g.Key, g => g.Count()),
+                Options = new HistogramOptions()
+                {
+                    Title = "Satelite histogram",
+                    XLabel = "Hits",
+                    YLabel = "Satellites",
+                    BinCount = 20
+                }
+            };
+
+            Histogram<int, int> speedHistogram = new Histogram<int, int>()
+            {
+                Data = gpsData.Select(x => x.Speed)
+                    .GroupBy(n => n)
+                    .ToDictionary(g => g.Key, g => g.Count()),
+                Options = new HistogramOptions()
+                {
+                    Title = "Speed histogram",
+                    XLabel = "Hits",
+                    YLabel = "Speed"
+                }
+            };
+
+            sateliteHistogram.Render();
+            speedHistogram.Render();
         }
     }
 }
