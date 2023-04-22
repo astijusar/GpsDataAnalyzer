@@ -15,18 +15,11 @@ namespace GpsDataAnalyzer
             const string BINARY_FILE = "2019-09.bin";
 
             var gpsData = new List<GpsData>();
+            var fileReaderManager = new FileReaderManager<GpsData>();
 
-            var jsonFileReader = new JsonFileReader<GpsData>();
-
-            var csvParser = new CsvParser<GpsData>();
-            var csvFileReader = new CsvFileReader<GpsData>(csvParser);
-
-            var binaryParser = new BinaryParser();
-            var binaryFileReader = new BinaryFileReader(binaryParser);
-
-            gpsData.AddRange(jsonFileReader.ReadFile(JSON_FILE));
-            gpsData.AddRange(csvFileReader.ReadFile(CSV_FILE));
-            gpsData.AddRange(binaryFileReader.ReadFile(BINARY_FILE));
+            gpsData.AddRange(fileReaderManager.JsonFile.ReadFile(JSON_FILE));
+            gpsData.AddRange(fileReaderManager.CsvFile.ReadFile(CSV_FILE));
+            gpsData.AddRange(fileReaderManager.BinaryFile.ReadFile(BINARY_FILE));
         }
     }
 }

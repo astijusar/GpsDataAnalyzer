@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace GpsDataAnalyzer.Utilities
 {
+    // should be a generic class
     public class BinaryParser : IBinaryParser<GpsData>
     {
         public GpsData ParseBytes(byte[] bytes)
