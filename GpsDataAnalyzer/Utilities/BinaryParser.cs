@@ -31,7 +31,7 @@ namespace GpsDataAnalyzer.Utilities
                     gpsData.Speed = reader.ReadUInt16();
                     gpsData.Angle = reader.ReadUInt16();
                     gpsData.Altitude = reader.ReadUInt16();
-                    gpsData.Satelites = reader.ReadByte();
+                    gpsData.Satellites = reader.ReadByte();
                 }
             }
 

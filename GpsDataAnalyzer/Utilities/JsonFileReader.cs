@@ -26,14 +26,9 @@ namespace GpsDataAnalyzer.Utilities
             {
                 string jsonData = sr.ReadToEnd();
 
-                var jsonOptions = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
-
                 try
                 {
-                    data = JsonSerializer.Deserialize<List<T>>(jsonData, jsonOptions);
+                    data = JsonSerializer.Deserialize<List<T>>(jsonData);
                 }
                 catch (JsonException ex)
                 {

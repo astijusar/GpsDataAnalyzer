@@ -14,6 +14,6 @@ namespace GpsDataAnalyzer.Models
         public int Speed { get; set; }
         public int Angle { get; set; }
         public int Altitude { get; set; }
-        public int Satelites { get; set; }
+        public int Satellites { get; set; }
     }
 }
