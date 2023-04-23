@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GpsDataAnalyzer.Utilities
 {
-    public class BinaryFileReader : IFileReader<GpsData>
+    public class BinaryFileReader
     {
         private readonly IBinaryParser<GpsData> _parser;
 

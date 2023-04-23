@@ -1,10 +1,10 @@
-﻿using GpsDataAnalyzer.Utilities.Interfaces;
+﻿using FileReaderLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
-namespace GpsDataAnalyzer.Utilities
+namespace FileReaderLibrary
 {
     public class CsvFileReader<T> : IFileReader<T>
     {

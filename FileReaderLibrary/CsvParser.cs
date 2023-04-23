@@ -1,4 +1,4 @@
-﻿using GpsDataAnalyzer.Utilities.Interfaces;
+﻿using FileReaderLibrary.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace GpsDataAnalyzer.Utilities
+namespace FileReaderLibrary
 {
     public class CsvParser<T> : ICsvParser<T>
     {

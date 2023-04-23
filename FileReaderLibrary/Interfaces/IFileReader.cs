@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GpsDataAnalyzer.Utilities.Interfaces
+namespace FileReaderLibrary.Interfaces
 {
     public interface IFileReader<T>
     {

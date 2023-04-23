@@ -1,7 +1,6 @@
 ﻿using ConsoleChartLibrary;
+using FileReaderLibrary;
 using GpsDataAnalyzer.Models;
-using GpsDataAnalyzer.Utilities;
-using GpsDataAnalyzer.Utilities.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

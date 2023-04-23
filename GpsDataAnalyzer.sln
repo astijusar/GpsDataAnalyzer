@@ -5,7 +5,9 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GpsDataAnalyzer", "GpsDataAnalyzer\GpsDataAnalyzer.csproj", "{028D6C87-AE5D-4481-801A-71EB403486BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleChartLibrary", "ConsoleChartLibrary\ConsoleChartLibrary.csproj", "{B599025B-B239-4E42-A70A-3E2130E9A7EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleChartLibrary", "ConsoleChartLibrary\ConsoleChartLibrary.csproj", "{B599025B-B239-4E42-A70A-3E2130E9A7EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileReaderLibrary", "FileReaderLibrary\FileReaderLibrary.csproj", "{8957777E-BA2F-4F07-99F7-433DD57197D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{B599025B-B239-4E42-A70A-3E2130E9A7EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B599025B-B239-4E42-A70A-3E2130E9A7EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B599025B-B239-4E42-A70A-3E2130E9A7EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8957777E-BA2F-4F07-99F7-433DD57197D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8957777E-BA2F-4F07-99F7-433DD57197D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8957777E-BA2F-4F07-99F7-433DD57197D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8957777E-BA2F-4F07-99F7-433DD57197D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

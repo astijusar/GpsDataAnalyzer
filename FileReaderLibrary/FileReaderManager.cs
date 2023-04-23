@@ -1,18 +1,11 @@
-﻿using GpsDataAnalyzer.Models;
-using GpsDataAnalyzer.Utilities.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FileReaderLibrary.Interfaces;
 
-namespace GpsDataAnalyzer.Utilities
+namespace FileReaderLibrary
 {
     public class FileReaderManager<T> : IFileReaderManager<T>
     {
         private IFileReader<T> _jsonFileReader;
         private IFileReader<T> _csvFileReader;
-        private IFileReader<GpsData> _binaryFileReader;
 
         public IFileReader<T> JsonFile
         {
@@ -36,20 +29,6 @@ namespace GpsDataAnalyzer.Utilities
                 }
 
                 return _csvFileReader;
-            }
-        }
-
-        public IFileReader<GpsData> BinaryFile
-        {
-            get
-            {
-                if (_binaryFileReader == null)
-                {
-                    var binaryParser = new BinaryParser();
-                    _binaryFileReader = new BinaryFileReader(binaryParser);
-                }
-
-                return _binaryFileReader;
             }
         }
     }
