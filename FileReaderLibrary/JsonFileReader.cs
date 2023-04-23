@@ -9,24 +9,28 @@ namespace FileReaderLibrary
 {
     public class JsonFileReader<T> : IFileReader<T>
     {
-        // TODO: read file with buffer
         public List<T> ReadFile(string filePath)
         {
             var data = new List<T>();
 
             try
             {
-                using (var sr = new StreamReader(filePath))
+                using (var fs = File.OpenRead(filePath))
                 {
-                    string jsonData = sr.ReadToEnd();
-
-                    try
+                    using (var json = JsonDocument.Parse(fs))
                     {
-                        data = JsonSerializer.Deserialize<List<T>>(jsonData);
-                    }
-                    catch (JsonException ex)
-                    {
-                        Console.WriteLine($"Error deserializing JSON: {ex.Message}");
+                        foreach (var jsonElement in json.RootElement.EnumerateArray())
+                        {
+                            try
+                            {
+                                var item = JsonSerializer.Deserialize<T>(jsonElement.GetRawText());
+                                data.Add(item);
+                            }
+                            catch (JsonException ex)
+                            {
+                                Console.WriteLine($"Error deserializing JSON: {ex.Message}");
+                            }
+                        }
                     }
                 }
             }
