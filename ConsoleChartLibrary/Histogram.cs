@@ -44,6 +44,7 @@ namespace ConsoleChartLibrary
             var keys = sortedData.Select(x => x.Key);
 
             var maxVal = Data.Values.Max();
+            var minVal = Data.Values.Min();
 
             int maxHeight = 10;
             int maxWidth = 80;
@@ -51,7 +52,7 @@ namespace ConsoleChartLibrary
             double scale = (double)maxWidth / (dynamic)maxVal;
 
             Console.WriteLine($"{Options.Title}".PadLeft((Console.WindowWidth - Options.Title.Length) / 2));
-            Console.WriteLine("");
+            Console.WriteLine();
 
             for (var i = maxHeight; i > 0; i--)
             {
@@ -67,6 +68,23 @@ namespace ConsoleChartLibrary
                         Console.Write("  ".PadRight(maxWidth / Data.Count()));
                     }
                 }
+
+                if (i == maxHeight)
+                {
+                    if (Options.YLabel != null)
+                    {
+                        Console.WriteLine($"{maxVal} {Options.YLabel}".PadLeft(maxWidth / 5));
+                    }
+                    else
+                    {
+                        Console.Write($"{maxVal}".PadLeft(maxWidth / 6));
+                    }
+                }
+                else if (i == 1)
+                {
+                    Console.Write($"{minVal}".PadLeft(maxWidth / 6));
+                }
+
                 Console.WriteLine();
             }
 
@@ -84,6 +102,12 @@ namespace ConsoleChartLibrary
             }
             Console.WriteLine();
             Console.WriteLine();
+
+            if (Options.XLabel != null)
+            {
+                Console.WriteLine($"{Options.XLabel}".PadLeft((Console.WindowWidth - Options.Title.Length) / 2));
+                Console.WriteLine();
+            }
         }
 
         private void printChartHorizontally(int? bins, int binWidth)
@@ -93,7 +117,7 @@ namespace ConsoleChartLibrary
             var maxVal = Data.Values.Max();
 
             Console.WriteLine($"{Options.Title}".PadLeft((Console.WindowWidth - Options.Title.Length) / 2));
-            Console.WriteLine("");
+            Console.WriteLine();
 
             if (Options.YLabel != null)
             {
@@ -120,7 +144,6 @@ namespace ConsoleChartLibrary
 
             if (Options.XLabel != null)
             {
-                Console.WriteLine();
                 Console.WriteLine($"{Options.XLabel}".PadLeft((Console.WindowWidth - Options.Title.Length) / 2));
             }
 

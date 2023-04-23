@@ -31,8 +31,8 @@ namespace GpsDataAnalyzer
                 Options = new HistogramOptions()
                 {
                     Title = "Satelite histogram",
-                    XLabel = "Hits",
-                    YLabel = "Satellites",
+                    XLabel = "Satellites",
+                    YLabel = "Hits",
                     BinCount = 20
                 }
             };
@@ -50,7 +50,14 @@ namespace GpsDataAnalyzer
                 }
             };
 
+            Console.WriteLine();
+
             sateliteHistogram.Render();
+
+            Console.Write(new string('-', Console.WindowWidth));
+            Console.WriteLine();
+            Console.WriteLine();
+
             speedHistogram.Render();
         }
     }
