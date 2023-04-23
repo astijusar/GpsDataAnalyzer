@@ -14,21 +14,28 @@ namespace FileReaderLibrary
         {
             var data = new List<T>();
 
-            using (var sr = new StreamReader(filePath))
+            try
             {
-                string jsonData = sr.ReadToEnd();
-
-                try
+                using (var sr = new StreamReader(filePath))
                 {
-                    data = JsonSerializer.Deserialize<List<T>>(jsonData);
-                }
-                catch (JsonException ex)
-                {
-                    Console.WriteLine($"Error deserializing JSON: {ex.Message}");
-                }
+                    string jsonData = sr.ReadToEnd();
 
-                return data;
+                    try
+                    {
+                        data = JsonSerializer.Deserialize<List<T>>(jsonData);
+                    }
+                    catch (JsonException ex)
+                    {
+                        Console.WriteLine($"Error deserializing JSON: {ex.Message}");
+                    }
+                }
             }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"An error occurred while reading the JSON file: {ex.Message}");
+            }
+
+            return data;
         }
     }
 }

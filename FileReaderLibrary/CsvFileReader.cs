@@ -19,16 +19,23 @@ namespace FileReaderLibrary
         {
             var data = new List<T>();
 
-            using (var sr = new StreamReader(filePath))
+            try
             {
-                while (!sr.EndOfStream)
+                using (var sr = new StreamReader(filePath))
                 {
-                    var line = sr.ReadLine();
+                    while (!sr.EndOfStream)
+                    {
+                        var line = sr.ReadLine();
 
-                    var obj = _parser.ParseLine(line);
+                        var obj = _parser.ParseLine(line);
 
-                    data.Add(obj);
+                        data.Add(obj);
+                    }
                 }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"An error occurred while reading the CSV file: {ex.Message}");
             }
 
             return data;
