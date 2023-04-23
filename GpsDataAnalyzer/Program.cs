@@ -1,6 +1,7 @@
 ﻿using ConsoleChartLibrary;
 using FileReaderLibrary;
 using GpsDataAnalyzer.Models;
+using GpsDataAnalyzer.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,11 +17,12 @@ namespace GpsDataAnalyzer
             const string BINARY_FILE = "2019-09.bin";
 
             var gpsData = new List<GpsData>();
+            var binFileReader = new BinaryFileReader();
             var fileReaderManager = new FileReaderManager<GpsData>();
 
             gpsData.AddRange(fileReaderManager.JsonFile.ReadFile(JSON_FILE));
             gpsData.AddRange(fileReaderManager.CsvFile.ReadFile(CSV_FILE));
-            //gpsData.AddRange(fileReaderManager.BinaryFile.ReadFile(BINARY_FILE));
+            gpsData.AddRange(binFileReader.ReadFile(BINARY_FILE));
 
             Histogram<int, int> sateliteHistogram = new Histogram<int, int>()
             {

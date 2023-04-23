@@ -1,9 +1,9 @@
 ﻿using GpsDataAnalyzer.Models;
-using GpsDataAnalyzer.Utilities.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -13,36 +13,53 @@ namespace GpsDataAnalyzer.Utilities
 {
     public class BinaryFileReader
     {
-        private readonly IBinaryParser<GpsData> _parser;
-
-        public BinaryFileReader(IBinaryParser<GpsData> parser)
-        {
-            _parser = parser;
-        }
-
         public List<GpsData> ReadFile(string filePath)
         {
             var data = new List<GpsData>();
 
-            using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            try
             {
-                using (var binaryReader = new BinaryReader(fileStream))
+                using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
                 {
-                    while (binaryReader.BaseStream.Position < binaryReader.BaseStream.Length)
+                    using (var binaryReader = new BinaryReader(fileStream))
                     {
-                        byte[] bytes = binaryReader.ReadBytes(23);
+                        while (binaryReader.BaseStream.Position < binaryReader.BaseStream.Length)
+                        {
+                            GpsData gpsData = new GpsData();
 
-                        try
-                        {
-                            GpsData obj = _parser.ParseBytes(bytes);
-                            data.Add(obj);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
+                            gpsData.Latitude = BitConverter.ToInt32(ReverseBytes(binaryReader.ReadBytes(4))) / 10000000.0;
+                            gpsData.Longitude = BitConverter.ToInt32(ReverseBytes(binaryReader.ReadBytes(4))) / 10000000.0;
+
+                            var milliseconds = BitConverter.ToInt64(ReverseBytes(binaryReader.ReadBytes(8)));
+                            gpsData.GpsTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(milliseconds);
+
+                            gpsData.Speed = BitConverter.ToInt16(ReverseBytes(binaryReader.ReadBytes(2)));
+                            gpsData.Angle = BitConverter.ToInt16(ReverseBytes(binaryReader.ReadBytes(2)));
+                            gpsData.Altitude = BitConverter.ToInt16(ReverseBytes(binaryReader.ReadBytes(2)));
+                            gpsData.Satellites = binaryReader.ReadByte();
+
+                            data.Add(gpsData);
                         }
                     }
                 }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"An error occurred while reading the binary file: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+            }
+
+            return data;
+        }
+
+        private byte[] ReverseBytes(byte[] data)
+        {
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(data);
             }
 
             return data;
