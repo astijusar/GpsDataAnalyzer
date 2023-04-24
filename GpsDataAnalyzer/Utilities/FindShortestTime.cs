@@ -61,7 +61,7 @@ namespace GpsDataAnalyzer.Utilities
 
             if (shortestTime == double.MaxValue)
             {
-                Console.WriteLine("No valid data found.");
+                Console.WriteLine("There is no section that is at least 100km long!");
                 return;
             }
 
