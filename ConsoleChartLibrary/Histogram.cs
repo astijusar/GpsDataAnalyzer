@@ -59,9 +59,13 @@ namespace ConsoleChartLibrary
                 foreach (var key in keys)
                 {
                     int barHeight = (int)((dynamic)Data[key] * scale / maxHeight);
-                    if (barHeight >= i || (i == 1 && (dynamic)Data[key] != 0))
-                    { 
-                        Console.Write("██".PadRight(maxWidth / Data.Count()));
+                    if (barHeight >= i)
+                    {
+                        Console.Write("▒▒".PadRight(maxWidth / Data.Count()));
+                    }
+                    else if (i == 1 && (dynamic)Data[key] != 0)
+                    {
+                        Console.Write("__".PadRight(maxWidth / Data.Count()));
                     }
                     else
                     {
@@ -138,7 +142,13 @@ namespace ConsoleChartLibrary
                 var count = sortedData.Where(x => x.Key.CompareTo(startT) >= 0 && x.Key.CompareTo(endT) < 0)
                     .Sum(x => (dynamic)x.Value);
 
-                var histogramBar = new string('▓', (int)((double)count / (dynamic)maxVal * 45));
+                var barWidth = (int)((double)count / (dynamic)maxVal * 45);
+                var histogramBar = new string('▓', barWidth);
+
+                if (barWidth == 0 && count != 0)
+                {
+                    histogramBar = "▌";
+                }
                 var line = $"{binLabel.PadRight(15)} | {histogramBar} {count}";
 
                 Console.WriteLine(line);
