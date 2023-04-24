@@ -30,7 +30,7 @@ namespace ConsoleChartLibrary
 
             if (binWidth == 1)
             {
-                printChartVertically(bins);
+                printChartVertically();
             }
             else
             {
@@ -38,7 +38,7 @@ namespace ConsoleChartLibrary
             }
         }
 
-        private void printChartVertically(int? bins)
+        private void printChartVertically()
         {
             var sortedData = Data.OrderBy(x => x.Key);
             var keys = sortedData.Select(x => x.Key);
@@ -59,7 +59,7 @@ namespace ConsoleChartLibrary
                 foreach (var key in keys)
                 {
                     int barHeight = (int)((dynamic)Data[key] * scale / maxHeight);
-                    if (barHeight >= i)
+                    if (barHeight >= i || (i == 1 && (dynamic)Data[key] != 0))
                     { 
                         Console.Write("██".PadRight(maxWidth / Data.Count()));
                     }
@@ -73,16 +73,16 @@ namespace ConsoleChartLibrary
                 {
                     if (Options.YLabel != null)
                     {
-                        Console.WriteLine($"{maxVal} {Options.YLabel}".PadLeft(maxWidth / 5));
+                        Console.WriteLine($"{maxVal} {Options.YLabel}");
                     }
                     else
                     {
-                        Console.Write($"{maxVal}".PadLeft(maxWidth / 6));
+                        Console.Write($"{maxVal}");
                     }
                 }
                 else if (i == 1)
                 {
-                    Console.Write($"{minVal}".PadLeft(maxWidth / 6));
+                    Console.Write($"{minVal}");
                 }
 
                 Console.WriteLine();
@@ -93,12 +93,14 @@ namespace ConsoleChartLibrary
             {
                 if ((dynamic)key < 10)
                 {
-                    Console.Write($"0{Convert.ToString(key).PadRight(maxWidth / keys.Count() - 1)} ");
+                    Console.Write($"0{Convert.ToString(key)}");
                 }
                 else
                 {
-                    Console.Write($"{Convert.ToString(key).PadRight(maxWidth / keys.Count() - 1)} ");
+                    Console.Write($"{Convert.ToString(key)}");
                 }
+
+                Console.Write("  ");
             }
             Console.WriteLine();
             Console.WriteLine();
