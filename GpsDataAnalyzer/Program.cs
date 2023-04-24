@@ -60,6 +60,11 @@ namespace GpsDataAnalyzer
             Console.WriteLine();
 
             speedHistogram.Render();
+
+            Console.WriteLine();
+            Console.WriteLine();
+
+            FindShortestTime.Find(gpsData);
         }
     }
 }
