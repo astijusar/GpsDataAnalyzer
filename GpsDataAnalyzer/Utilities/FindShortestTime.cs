@@ -65,12 +65,12 @@ namespace GpsDataAnalyzer.Utilities
                 return;
             }
 
-            Console.WriteLine($"Fastest road section of at least 100km was driven over {shortestTime}s and was {string.Format("{0:0.000}", finalLenght)}km long.");
+            Console.WriteLine($"Fastest road section of at least 100km was driven over {shortestTime}s and was {Math.Round(finalLenght, 2)}km long.");
             Console.WriteLine("Start Position: " + result.StartPos.Item1 + ", " + result.StartPos.Item2);
             Console.WriteLine("Start Time: " + result.StartTime);
             Console.WriteLine("End Position: " + result.EndPos.Item1 + ", " + result.EndPos.Item2);
             Console.WriteLine("End Time: " + result.EndTime);
-            Console.WriteLine("Average Speed: " + result.AverageSpeed);
+            Console.WriteLine($"Average Speed: {Math.Round(result.AverageSpeed, 1)}km/h");
         }
     }
 }
